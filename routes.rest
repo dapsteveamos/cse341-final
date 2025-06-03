@@ -1,0 +1,21 @@
+// Local Host
+
+### Example
+GET http://localhost:3002/contacts
+
+### Example
+GET http://localhost:3002/contacts/681e7aa0b1e181ebbc704155
+
+### Example
+POST http://localhost:3002/contacts HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Bruce",
+  "lastName": "Banner",
+  "email": "incredibleHulk@gmail.com",
+  "favoriteColor": "green",
+  "birthday": "???",
+  "location": "Mexico",
+  "sidekick": "Blue-Hulk"
+}
