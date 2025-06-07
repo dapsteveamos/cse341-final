@@ -5,9 +5,10 @@
     "description": "Users Api",
     "version": "1.0.0"
   },
-  "host": "cse341-final-i3fm.onrender.com",
+  "host": "localhost:3003",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -24,6 +25,26 @@
         }
       }
     },
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api-docs": {
       "get": {
         "description": "",
@@ -34,188 +55,52 @@
         }
       }
     },
-    "/contacts/": {
+    "/user/": {
       "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "Get all contacts",
-        "produces": [
-          "application/json"
-        ],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "Create a new contact",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "type": "string",
-                  "description": "First name of the contact",
-                  "example": "John"
-                },
-                "lastName": {
-                  "type": "string",
-                  "description": "Last name of the contact",
-                  "example": "Doe"
-                },
-                "email": {
-                  "type": "string",
-                  "description": "Email address of the contact",
-                  "format": "email",
-                  "example": "john.doe@example.com"
-                },
-                "favoriteColor": {
-                  "type": "string",
-                  "description": "Favorite color of the contact",
-                  "example": "Blue"
-                },
-                "birthday": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Birthday of the contact",
-                  "example": "1990-01-01"
-                },
-                "location": {
-                  "type": "string",
-                  "description": "The location of the contact",
-                  "example": "Utah"
-                },
-                "sidekick": {
-                  "type": "string",
-                  "description": "The name of the contact's sidekick",
-                  "example": "Jane Doe"
-                }
-              },
-              "required": [
-                "firstName",
-                "lastName",
-                "email",
-                "favoriteColor",
-                "birthday",
-                "location",
-                "sidekick"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
           },
-          "400": {
-            "description": "Invalid Input"
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/contacts/{id}": {
-      "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       },
-      "put": {
-        "tags": [
-          "Contacts"
-        ],
+      "post": {
         "description": "",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "John"
-                },
-                "lastName": {
-                  "example": "Doe"
+                "name": {
+                  "example": "any"
                 },
                 "email": {
-                  "example": "john.doe@example.com"
+                  "example": "any"
                 },
-                "favoriteColor": {
-                  "example": "Blue"
-                },
-                "birthday": {
-                  "example": "1990-01-01"
-                },
-                "location": {
-                  "example": "Utah"
-                },
-                "sidekick": {
-                  "example": "Jane Doe"
+                "age": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -223,92 +108,9 @@
         }
       }
     },
-    "/locations/": {
+    "/user/{id}": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
-        "description": "Get all locations",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Locations"
-        ],
-        "description": "Create a new location",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The name of the location",
-                  "example": "Hideout"
-                },
-                "city": {
-                  "type": "string",
-                  "description": "The city where the location is",
-                  "example": "Salt Lake City"
-                },
-                "state": {
-                  "type": "string",
-                  "description": "The state where the location is",
-                  "example": "Utah"
-                },
-                "country": {
-                  "type": "string",
-                  "description": "The Country where the location is",
-                  "example": "USA"
-                },
-                "size": {
-                  "type": "string",
-                  "description": "The general size of the location",
-                  "example": "Small"
-                }
-              },
-              "required": [
-                "name",
-                "city",
-                "state",
-                "country",
-                "size"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Invalid Input"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/locations/{id}": {
-      "get": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -320,13 +122,19 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
         "parameters": [
           {
@@ -342,29 +150,13 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
-                  "description": "The name of the location",
-                  "example": "Hideout"
+                  "example": "any"
                 },
-                "city": {
-                  "type": "string",
-                  "description": "The city where the location is",
-                  "example": "Salt Lake City"
+                "email": {
+                  "example": "any"
                 },
-                "state": {
-                  "type": "string",
-                  "description": "The state where the location is",
-                  "example": "Utah"
-                },
-                "country": {
-                  "type": "string",
-                  "description": "The Country where the location is",
-                  "example": "USA"
-                },
-                "size": {
-                  "type": "string",
-                  "description": "The general size of the location",
-                  "example": "Small"
+                "age": {
+                  "example": "any"
                 }
               }
             }
@@ -374,15 +166,18 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
         "parameters": [
           {
@@ -393,8 +188,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
