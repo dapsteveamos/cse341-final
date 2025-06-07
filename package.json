@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "swagger": "nodd swagger.js"
+    "swagger": "node swagger.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
