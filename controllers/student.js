@@ -5,7 +5,7 @@ const ObjectId = require('mongodb').ObjectId;
 const getAll = async (req, res) => {
     //#swagger.tags=['Students']
     try {
-        const result= await mongodb.getDatabase().db().collection('students').find();
+        const result= await mongodb.getDatabase().db('final').collection('student').find();
         const students = await result.toArray();
         res.status(200).json(students);
     } catch (err) {
@@ -18,11 +18,11 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     //#swagger.tags=['Students']
     try {
-        const userId = new ObjectId(req.params.id);
-        const result = await mongodb.getDatabase().db().collection('students').find({_id: studentId});
+        const studentId = new ObjectId(req.params.id);
+        const result = await mongodb.getDatabase().db('final').collection('student').find({_id: studentId});
         const students = await result.toArray();
-        if (student.length > 0) {
-            res.status(200).json(student[0]);
+        if (students.length > 0) {
+            res.status(200).json(students[0]);
 
         } else {
         res.status(404).json({message: 'Student not found'});
@@ -46,7 +46,7 @@ const createStudent = async ( req, res) => {
             phoneNum: req.body.phoneNum,
             address: req.body.address
         };
-        const response = await mongodb.getDatabase().db().collection('students').insertOne({ _id: studentId });
+        const response = await mongodb.getDatabase().db('final').collection('student').insertOne(student);
         if (response.acknowledged) {
             res.status(201).json(response);
         } else {
@@ -72,7 +72,7 @@ const updateStudent = async (req, res) => {
             phoneNum: req.body.phoneNum,   
             address: req.body.address, 
         };
-        const response = await mongodb.getDatabase().db().collection('students').replaceOne({ _id: studentId });
+        const response = await mongodb.getDatabase().db('final').collection('student').replaceOne({ _id: studentId }, student);
         if (response.modifiedCount > 0) {
             res.status(204).send();
         } else {
@@ -88,8 +88,8 @@ const updateStudent = async (req, res) => {
 const deleteStudent = async (req, res) => {
     //#swagger.tags=['Students']
     try {
-        const userId = new ObjectId(req.params.id);
-        const response = await mongodb.getDatabase().db().collection('students').deleteOne({ _id: studentId });
+        const studentId = new ObjectId(req.params.id);
+        const response = await mongodb.getDatabase().db('final').collection('student').deleteOne({ _id: studentId });
         if (response.deletedCount > 0) {
             res.status(200).json({message: 'Student deleted'});
         } else {
