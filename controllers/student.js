@@ -3,6 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 // Get all students
 const getAll = async (req, res) => {
+    //#swagger.tags=['Students']
     try {
         const result= await mongodb.getDatabase().db().collection('students').find();
         const students = await result.toArray();
@@ -15,6 +16,7 @@ const getAll = async (req, res) => {
 
 // Get a single student
 const getSingle = async (req, res) => {
+    //#swagger.tags=['Students']
     try {
         const userId = new ObjectId(req.params.id);
         const result = await mongodb.getDatabase().db().collection('students').find({_id: studentId});
@@ -33,6 +35,7 @@ const getSingle = async (req, res) => {
 
 // Create a new student
 const createStudent = async ( req, res) => {
+    //#swagger.tags=['Students']
     try {
         const student = {
             firstName: req.body.firstName,
@@ -57,6 +60,7 @@ const createStudent = async ( req, res) => {
 
 // Update a student
 const updateStudent = async (req, res) => {
+    //#swagger.tags=['Students']
     try {
         const studentId = new ObjectId(req.params.id);
         const student = {
@@ -82,6 +86,7 @@ const updateStudent = async (req, res) => {
 
 // Delete Student
 const deleteStudent = async (req, res) => {
+    //#swagger.tags=['Students']
     try {
         const userId = new ObjectId(req.params.id);
         const response = await mongodb.getDatabase().db().collection('students').deleteOne({ _id: studentId });
