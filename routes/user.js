@@ -6,9 +6,9 @@ const router = express.Router();
 const userController = require('../controllers/user.js');
 
 const userValidationRules = {
-    username: 'required|string|min:3',
+    name: 'required|string|min:3',
     email: 'required|email',
-    password: 'required|string|min:6'
+    age: 'required|string|min:1'
 };
 
 router.get('/', isAuthenticated, userController.getAll);
