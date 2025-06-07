@@ -1,6 +1,6 @@
 const validator = require('../helpers/validate.js');
 
-const validate = (rules) => {
+const checkValidate = (rules) => {
     return (req, res, next) => {
         validator(req.body, rules, {}, (err, status) => {
             if (!status) {
@@ -16,6 +16,17 @@ const validate = (rules) => {
     };
 };
 
+const teacherRules = () => {
+    return {
+        firstName: 'required|string',
+        lastName: 'required|string',
+        email: 'required|email',
+        department: 'required|string',
+        hireDate: 'required|date'
+    };
+};
+
 module.exports = {
-    validate
+    checkValidate,
+    teacherRules
 };
