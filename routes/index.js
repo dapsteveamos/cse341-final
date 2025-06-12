@@ -1,14 +1,20 @@
-const passport = require('passport');
+const express = require('express');
+const router = express.Router();
 
-const router = require('express').Router();
-
-const swagger = require('../swagger');
-router.use('/api-docs', swagger.serve, swagger.setup);
+const isAuthenticated = require('../middleware/isAuthenticated');
 
 // router.get('/', (req, res) => { 
 //     //#swagger.tags=['Hello World']
 //     res.send('Hello World');
 // });
+
+// router.use('/products', isAuthenticated, require('./products'));
+
+// router.use('/stores', isAuthenticated, require('./stores'));
+
+router.get('/', isAuthenticated, (req, res) => {
+  res.send('Welcome to the Products API');
+});
 
 router.use('/course', require('./course'));
 
@@ -20,13 +26,6 @@ router.use('/teacher', require('./teacher'));
 
 router.use('/user', require('./user'));
 
-router.get('/login', passport.authenticate('github'), (req, res) => {});
 
-router.get('/logout', function(req, res, next) {
-    req.logout(function(err) {
-        if (err) { return next(err); }
-        res.redirect('/');
-    });
-});
 
 module.exports = router;

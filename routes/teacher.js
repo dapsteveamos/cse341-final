@@ -1,6 +1,4 @@
 const express = require('express');
-const validation = require('../middleware/validator.js');
-const { isAuthenticated } = require('../middleware/authenticate.js');
 const router = express.Router();
 
 const teacherController = require('../controllers/teacher.js');
@@ -138,8 +136,6 @@ router.get('/:id', teacherController.getSingle);
  */
 router.post(
   '/',
-  validation.checkValidate(validation.teacherRules()),
-  isAuthenticated,
   teacherController.createTeacher
 );
 
@@ -192,8 +188,6 @@ router.post(
  */
 router.put(
   '/:id',
-  validation.checkValidate(validation.teacherRules()),
-  isAuthenticated,
   teacherController.updateTeacher
 );
 
@@ -223,6 +217,6 @@ router.put(
  *       500:
  *         description: Server error
  */
-router.delete('/:id', isAuthenticated, teacherController.deleteTeacher);
+router.delete('/:id', teacherController.deleteTeacher);
 
 module.exports = router;
