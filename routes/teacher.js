@@ -136,7 +136,12 @@ router.get('/:id', teacherController.getSingle);
  *       500:
  *         description: Server error
  */
-router.post('/', validation.checkValidate(validation.teacherRules()), isAuthenticated, teacherController.createTeacher);
+router.post(
+  '/',
+  validation.checkValidate(validation.teacherRules()),
+  isAuthenticated,
+  teacherController.createTeacher
+);
 
 /**
  * @swagger
@@ -185,7 +190,12 @@ router.post('/', validation.checkValidate(validation.teacherRules()), isAuthenti
  *       500:
  *         description: Server error
  */
-router.put('/:id', validation.checkValidate(validation.teacherRules()), isAuthenticated, teacherController.updateTeacher);
+router.put(
+  '/:id',
+  validation.checkValidate(validation.teacherRules()),
+  isAuthenticated,
+  teacherController.updateTeacher
+);
 
 /**
  * @swagger
