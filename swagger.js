@@ -1,16 +1,31 @@
-const swaggerAutogen = require('swagger-autogen')();
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-const doc = {
+// Swagger options
+const options = {
+  definition: {
     info: {
         title: 'Users Api',
         description: 'Users Api'
     },
-    host: 'cse341-final-i3fm.onrender.com',
-    schemes: ['http', 'https']
+    servers: [
+      {
+        url: `https://cse341-1-swgh.onrender.com`,
+        description: 'Production server',
+      },
+      {
+        url: `http://localhost:${process.env.PORT || 8080}`,
+        description: 'Development server',
+      },
+    ],
+  },
+  apis: ['./routes/*.js'],
 };
 
-const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/index.js'];
+const specs = swaggerJsdoc(options);
 
-// this will generate swagger.json
-swaggerAutogen(outputFile, endpointsFiles, doc);
+module.exports = {
+  serve: swaggerUi.serve,
+  setup: swaggerUi.setup(specs),
+  specs: specs
+};

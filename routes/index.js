@@ -2,7 +2,8 @@ const passport = require('passport');
 
 const router = require('express').Router();
 
-router.use('/', require('./swagger'));
+const swagger = require('../swagger');
+router.use('/api-docs', swagger.serve, swagger.setup);
 
 // router.get('/', (req, res) => { 
 //     //#swagger.tags=['Hello World']

@@ -15,9 +15,9 @@ router.get('/', isAuthenticated, userController.getAll);
 
 router.get('/:id', isAuthenticated, userController.getSingle);
 
-router.post('/', isAuthenticated, validation.validate(userValidationRules), userController.createUser);
+router.post('/', isAuthenticated, validation.checkValidate(userValidationRules), userController.createUser);
 
-router.put('/:id', isAuthenticated, validation.validate(userValidationRules), userController.updateUser);
+router.put('/:id', isAuthenticated, validation.checkValidate(userValidationRules), userController.updateUser);
 
 router.delete('/:id', isAuthenticated, userController.deleteUser);
 
