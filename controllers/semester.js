@@ -90,10 +90,10 @@ const deleteSemester = async (req, res) => {
         } else {
             res.status(404).json({ message: 'semester not found' });
         }
-    } catch {
-        console.error(err);
-        res.status(500).json({ message: err.message || 'Error deleting semester' });
-    }
+} catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message || 'Error deleting semester' });
+}
 };
 
 module.exports = {
