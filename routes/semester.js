@@ -5,10 +5,10 @@ const router = express.Router();
 
 const semesterController = require('../controllers/semester.js');
 
-// router.get('/', );
-// router.get('/:id', );
-// router.post('/', )
-// router.put('/:id', );
-// router.delete('/:id', );
+router.get('/', semesterController.getAll);
+router.get('/:id', semesterController.getSingle);
+router.post('/', semesterController.createSemester )
+router.put('/:id', semesterController.updateSemester);
+router.delete('/:id', semesterController.deleteSemester);
 
 module.exports = router;

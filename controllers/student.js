@@ -3,9 +3,9 @@ const ObjectId = require('mongodb').ObjectId;
 
 // Get all students
 const getAll = async (req, res) => {
-    //#swagger.tags=['Students']
+    //#swagger.tags=['students']
     try {
-        const result= await mongodb.getDatabase().db('final').collection('student').find();
+        const result = await mongodb.getDatabase().db('final').collection('student').find();
         const students = await result.toArray();
         res.status(200).json(students);
     } catch (err) {
@@ -16,16 +16,16 @@ const getAll = async (req, res) => {
 
 // Get a single student
 const getSingle = async (req, res) => {
-    //#swagger.tags=['Students']
+    //#swagger.tags=['students']
     try {
         const studentId = new ObjectId(req.params.id);
-        const result = await mongodb.getDatabase().db('final').collection('student').find({_id: studentId});
+        const result = await mongodb.getDatabase().db('final').collection('student').find({ _id: studentId });
         const students = await result.toArray();
         if (students.length > 0) {
             res.status(200).json(students[0]);
 
         } else {
-        res.status(404).json({message: 'Student not found'});
+            res.status(404).json({ message: 'student not found' });
         }
     } catch (err) {
         console.error(err);
@@ -34,8 +34,8 @@ const getSingle = async (req, res) => {
 };
 
 // Create a new student
-const createStudent = async ( req, res) => {
-    //#swagger.tags=['Students']
+const createStudent = async (req, res) => {
+    //#swagger.tags=['students']
     try {
         const student = {
             firstName: req.body.firstName,
@@ -50,17 +50,17 @@ const createStudent = async ( req, res) => {
         if (response.acknowledged) {
             res.status(201).json(response);
         } else {
-            res.status(500).json({message: 'Failed to create student'});
+            res.status(500).json({ message: 'Failed to create student' });
         }
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: err.message || 'Error creating student'});
+        res.status(500).json({ message: err.message || 'Error creating student' });
     }
 };
 
 // Update a student
 const updateStudent = async (req, res) => {
-    //#swagger.tags=['Students']
+    //#swagger.tags=['students']
     try {
         const studentId = new ObjectId(req.params.id);
         const student = {
@@ -69,40 +69,40 @@ const updateStudent = async (req, res) => {
             username: req.body.username,
             birthday: req.body.birthday,
             email: req.body.email,
-            phoneNum: req.body.phoneNum,   
-            address: req.body.address, 
+            phoneNum: req.body.phoneNum,
+            address: req.body.address,
         };
         const response = await mongodb.getDatabase().db('final').collection('student').replaceOne({ _id: studentId }, student);
         if (response.modifiedCount > 0) {
             res.status(204).send();
         } else {
-            res.status(404).json({ message: 'Student not found'});
+            res.status(404).json({ message: 'Student not found' });
         }
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: err.message || 'Error updating student'});
+        res.status(500).json({ message: err.message || 'Error updating student' });
     }
 };
 
-// Delete Student
+// Delete student
 const deleteStudent = async (req, res) => {
-    //#swagger.tags=['Students']
+    //#swagger.tags=['students']
     try {
         const studentId = new ObjectId(req.params.id);
         const response = await mongodb.getDatabase().db('final').collection('student').deleteOne({ _id: studentId });
         if (response.deletedCount > 0) {
-            res.status(200).json({message: 'Student deleted'});
+            res.status(200).json({ message: 'student deleted' });
         } else {
-            res.status(404).json({message: 'Student not found'});
+            res.status(404).json({ message: 'student not found' });
         }
     } catch {
-console.error(err);
-        res.status(500).json({ message: err.message || 'Error deleting student'});
+        console.error(err);
+        res.status(500).json({ message: err.message || 'Error deleting student' });
     }
 };
 
 module.exports = {
-    getAll, 
+    getAll,
     getSingle,
     createStudent,
     updateStudent,
