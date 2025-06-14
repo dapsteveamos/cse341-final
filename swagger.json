@@ -422,11 +422,16 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": { "type": "string", "example": "John Smith" },
-                  "email": { "type": "string", "example": "john@example.com" },
-                  "subject": { "type": "string", "example": "Mathematics" }
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "subject": { "type": "string" }
                 },
-                "required": ["name", "email", "subject"]
+                "required": ["name", "email", "subject"],
+                "example": {
+                  "name": "John Smith",
+                  "email": "john@example.com",
+                  "subject": "Mathematics"
+                }
               }
             }
           }
@@ -506,8 +511,11 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Teacher ID",
-            "schema": { "type": "string" }
+            "description": "The ID of the teacher to update",
+            "schema": {
+              "type": "string",
+              "example": "60d0fe4f5311236168a109ca"
+            }
           }
         ],
         "requestBody": {
@@ -517,11 +525,22 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": { "type": "string", "example": "Jane Doe" },
-                  "email": { "type": "string", "example": "jane@example.com" },
-                  "subject": { "type": "string", "example": "Science" }
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  }
                 },
-                "required": ["name", "email", "subject"]
+                "required": ["name", "email", "subject"],
+                "example": {
+                  "name": "Jane Doe",
+                  "email": "jane@example.com",
+                  "subject": "Science"
+                }
               }
             }
           }
@@ -529,6 +548,9 @@
         "responses": {
           "204": {
             "description": "Teacher updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID or malformed request"
           },
           "422": {
             "description": "Validation failed"
