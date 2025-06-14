@@ -8,7 +8,6 @@
   "host": "cse341-final-i3fm.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
