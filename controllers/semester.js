@@ -44,6 +44,7 @@ const createSemester = async (req, res) => {
             semesterStart: req.body.semesterStart,
             semesterEnd: req.body.semesterEnd
         };
+        console.log("Inserting semeser:", semeseter);
         const response = await mongodb.getDatabase().db('final').collection('semester').insertOne(semester);
         if (response.acknowledged) {
             res.status(201).json(response);
@@ -51,7 +52,7 @@ const createSemester = async (req, res) => {
             res.status(500).json({ message: 'Failed to create semester' });
         }
     } catch (err) {
-        console.error(err);
+        console.error('Create semester failed:', err);
         res.status(500).json({ message: err.message || 'Error creating semester' });
     }
 };
