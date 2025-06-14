@@ -31,10 +31,4 @@ router.put(
 
 router.delete('/:id', isAuthenticated, teacherController.deleteTeacher);
 
-// router.get('/', );
-// router.get('/:id', );
-// router.post('/', )
-// router.put('/:id', );
-// router.delete('/:id', );
-
 module.exports = router;

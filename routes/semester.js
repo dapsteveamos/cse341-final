@@ -49,8 +49,8 @@ router.put('/:id', (req, res, next) => {
 
 router.get('/', semesterController.getAll);
 router.get('/:id', semesterController.getSingle);
-router.post('/', semesterController.createSemester);
-router.put('/:id', semesterController.updateSemester);
+// router.post('/', semesterController.createSemester);
+// router.put('/:id', semesterController.updateSemester);
 router.delete('/:id', semesterController.deleteSemester);
 
 module.exports = router;

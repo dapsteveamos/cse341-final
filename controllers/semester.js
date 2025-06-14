@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 const getAll = async (req, res) => {
     //#swagger.tags=['semesters']
     try {
-        const result = await mongodb.getDatabase().db('final').collection('semesters').find();
+        const result = await mongodb.getDatabase().db('final').collection('semester').find();
         const semesters = await result.toArray();
         res.status(200).json(semesters);
     } catch (err) {
