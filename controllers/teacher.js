@@ -65,29 +65,7 @@ const getSingle = async (req, res) => {
 
 // Create New Teacher
 const createTeacher = async (req, res) => {
-    /*
-    #swagger.tags = ['teachers']
-    #swagger.description = 'Create a new teacher'
-    #swagger.requestBody = {
-        required: true,
-        content: {
-            "application/json": {
-                schema: {
-                    name: 'John Smith',
-                    email: 'john@example.com',
-                    subject: 'Mathematics'
-                }
-            }
-        }
-    }
-    #swagger.responses[201] = {
-        description: 'Teacher created successfully',
-        schema: {
-            acknowledged: true,
-            insertedId: '60d0fe4f5311236168a109ca'
-        }
-    }
-    */
+    // #swagger.tags = ['teachers']
     try {
         const teacher = {
             name: req.body.name,
@@ -107,30 +85,7 @@ const createTeacher = async (req, res) => {
 
 // Update Teacher by ID
 const updateTeacher = async (req, res) => {
-    /*
-    #swagger.tags = ['teachers']
-    #swagger.description = 'Update an existing teacher by ID'
-    #swagger.parameters['id'] = {
-        description: 'Teacher ID',
-        required: true,
-        type: 'string'
-    }
-    #swagger.requestBody = {
-        required: true,
-        content: {
-            "application/json": {
-                schema: {
-                    name: 'John Smith',
-                    email: 'john@example.com',
-                    subject: 'Mathematics'
-                }
-            }
-        }
-    }
-    #swagger.responses[204] = {
-        description: 'Teacher updated successfully'
-    }
-    */
+    // #swagger.tags = ['teachers']
     try {
         const teacherId = new ObjectId(req.params.id);
         const teacher = {

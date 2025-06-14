@@ -413,70 +413,33 @@
         }
       },
       "post": {
-        "tags": [
-          "teachers"
-        ],
-        "description": "Create a new teacher",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "John Smith"
-                },
-                "email": {
-                  "example": "john@example.com"
-                },
-                "subject": {
-                  "example": "Mathematics"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Teacher created successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "acknowledged": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "insertedId": {
-                  "type": "string",
-                  "example": "60d0fe4f5311236168a109ca"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
+        "tags": ["teachers"],
+        "summary": "Create a new teacher",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "name": "John Smith",
-                "email": "john@example.com",
-                "subject": "Mathematics"
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "example": "John Smith" },
+                  "email": { "type": "string", "example": "john@example.com" },
+                  "subject": { "type": "string", "example": "Mathematics" }
+                },
+                "required": ["name", "email", "subject"]
               }
             }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Teacher created successfully"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -536,61 +499,42 @@
         }
       },
       "put": {
-        "tags": [
-          "teachers"
-        ],
-        "description": "Update an existing teacher by ID",
+        "tags": ["teachers"],
+        "summary": "Update an existing teacher",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Teacher ID"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "John Smith"
-                },
-                "email": {
-                  "example": "john@example.com"
-                },
-                "subject": {
-                  "example": "Mathematics"
-                }
-              }
-            }
+            "description": "Teacher ID",
+            "schema": { "type": "string" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "Teacher updated successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "name": "John Smith",
-                "email": "john@example.com",
-                "subject": "Mathematics"
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "example": "Jane Doe" },
+                  "email": { "type": "string", "example": "jane@example.com" },
+                  "subject": { "type": "string", "example": "Science" }
+                },
+                "required": ["name", "email", "subject"]
               }
             }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Teacher updated successfully"
+          },
+          "422": {
+            "description": "Validation failed"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       },
