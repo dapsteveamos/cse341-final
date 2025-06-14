@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 // Get All Teachers
 const getAll = async (req, res) => {
     /*
-    #swagger.tags = ['Teachers']
+    #swagger.tags = ['teachers']
     #swagger.description = 'Get all teachers'
     #swagger.responses[200] = {
         description: 'Successful operation',
@@ -30,7 +30,7 @@ const getAll = async (req, res) => {
 // Get Single Teacher by ID
 const getSingle = async (req, res) => {
     /*
-    #swagger.tags = ['Teachers']
+    #swagger.tags = ['teachers']
     #swagger.description = 'Get a single teacher by ID'
     #swagger.parameters['id'] = {
         description: 'Teacher ID',
@@ -66,7 +66,7 @@ const getSingle = async (req, res) => {
 // Create New Teacher
 const createTeacher = async (req, res) => {
     /*
-    #swagger.tags = ['Teachers']
+    #swagger.tags = ['teachers']
     #swagger.description = 'Create a new teacher'
     #swagger.requestBody = {
         required: true,
@@ -108,7 +108,7 @@ const createTeacher = async (req, res) => {
 // Update Teacher by ID
 const updateTeacher = async (req, res) => {
     /*
-    #swagger.tags = ['Teachers']
+    #swagger.tags = ['teachers']
     #swagger.description = 'Update an existing teacher by ID'
     #swagger.parameters['id'] = {
         description: 'Teacher ID',
@@ -152,7 +152,7 @@ const updateTeacher = async (req, res) => {
 // Delete Teacher by ID
 const deleteTeacher = async (req, res) => {
     /*
-    #swagger.tags = ['Teachers']
+    #swagger.tags = ['teachers']
     #swagger.description = 'Delete a teacher by ID'
     #swagger.parameters['id'] = {
         description: 'Teacher ID',

@@ -36,7 +36,7 @@ const getSingle = async (req, res) => {
 
 // Create a new semester
 const createSemester = async (req, res) => {
-    //#swagger.tags=['semester']
+    //#swagger.tags=['semesters']
     try {
         const semester = {
             year: req.body.year,
@@ -58,7 +58,7 @@ const createSemester = async (req, res) => {
 
 // Update a semester
 const updateSemester = async (req, res) => {
-    //#swagger.tags=['semester']
+    //#swagger.tags=['semesters']
     try {
         const semesterId = new ObjectId(req.params.id);
         const semester = {
@@ -81,7 +81,7 @@ const updateSemester = async (req, res) => {
 
 // Delete semester
 const deleteSemester = async (req, res) => {
-    //#swagger.tags=['semester']
+    //#swagger.tags=['semesters']
     try {
         const semesterId = new ObjectId(req.params.id);
         const response = await mongodb.getDatabase().db('final').collection('semester').deleteOne({ _id: semesterId });

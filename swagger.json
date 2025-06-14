@@ -45,7 +45,7 @@
     "/semester/": {
       "post": {
         "tags": [
-          "semester"
+          "semesters"
         ],
         "description": "",
         "parameters": [
@@ -101,7 +101,7 @@
     "/semester/{id}": {
       "put": {
         "tags": [
-          "semester"
+          "semesters"
         ],
         "description": "",
         "parameters": [
@@ -175,7 +175,7 @@
       },
       "delete": {
         "tags": [
-          "semester"
+          "semesters"
         ],
         "description": "",
         "parameters": [
@@ -371,7 +371,7 @@
     "/teacher/": {
       "get": {
         "tags": [
-          "Teachers"
+          "teachers"
         ],
         "description": "Get all teachers",
         "responses": {
@@ -415,7 +415,7 @@
       },
       "post": {
         "tags": [
-          "Teachers"
+          "teachers"
         ],
         "description": "Create a new teacher",
         "responses": {
@@ -465,7 +465,7 @@
     "/teacher/{id}": {
       "get": {
         "tags": [
-          "Teachers"
+          "teachers"
         ],
         "description": "Get a single teacher by ID",
         "parameters": [
@@ -518,7 +518,7 @@
       },
       "put": {
         "tags": [
-          "Teachers"
+          "teachers"
         ],
         "description": "Update an existing teacher by ID",
         "parameters": [
@@ -559,7 +559,7 @@
       },
       "delete": {
         "tags": [
-          "Teachers"
+          "teachers"
         ],
         "description": "Delete a teacher by ID",
         "parameters": [
@@ -590,7 +590,7 @@
     "/user/": {
       "get": {
         "tags": [
-          "Users"
+          "users"
         ],
         "description": "",
         "responses": {
@@ -607,7 +607,7 @@
       },
       "post": {
         "tags": [
-          "Users"
+          "users"
         ],
         "description": "",
         "parameters": [
@@ -649,7 +649,7 @@
     "/user/{id}": {
       "get": {
         "tags": [
-          "Users"
+          "users"
         ],
         "description": "",
         "parameters": [
@@ -677,7 +677,7 @@
       },
       "put": {
         "tags": [
-          "Users"
+          "users"
         ],
         "description": "",
         "parameters": [
@@ -723,7 +723,7 @@
       },
       "delete": {
         "tags": [
-          "Users"
+          "users"
         ],
         "description": "",
         "parameters": [
