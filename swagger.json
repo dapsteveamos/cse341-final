@@ -8,22 +8,10 @@
   "host": "cse341-final-i3fm.onrender.com",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "tags": [
-          "Hello World"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/login": {
       "get": {
         "description": "",
@@ -54,10 +42,161 @@
         }
       }
     },
+    "/semester/": {
+      "post": {
+        "tags": [
+          "semester"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "example": "any"
+                },
+                "semesterSeason": {
+                  "example": "any"
+                },
+                "semesterStart": {
+                  "example": "any"
+                },
+                "semesterEnd": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "semesters"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/semester/{id}": {
+      "put": {
+        "tags": [
+          "semester"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "example": "any"
+                },
+                "semesterSeason": {
+                  "example": "any"
+                },
+                "semesterStart": {
+                  "example": "any"
+                },
+                "semesterEnd": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "semesters"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "semester"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/student/": {
       "get": {
         "tags": [
-          "Students"
+          "students"
         ],
         "description": "",
         "responses": {
@@ -71,7 +210,7 @@
       },
       "post": {
         "tags": [
-          "Students"
+          "students"
         ],
         "description": "",
         "parameters": [
@@ -119,7 +258,7 @@
     "/student/{id}": {
       "get": {
         "tags": [
-          "Students"
+          "students"
         ],
         "description": "",
         "parameters": [
@@ -144,7 +283,7 @@
       },
       "put": {
         "tags": [
-          "Students"
+          "students"
         ],
         "description": "",
         "parameters": [
@@ -199,7 +338,7 @@
       },
       "delete": {
         "tags": [
-          "Students"
+          "students"
         ],
         "description": "",
         "parameters": [
@@ -216,6 +355,225 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/teacher/": {
+      "get": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "Get all teachers",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "60d0fe4f5311236168a109ca"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "John Smith"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "john@example.com"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "example": "Mathematics"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "Create a new teacher",
+        "responses": {
+          "201": {
+            "description": "Teacher created successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "60d0fe4f5311236168a109ca"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "name": "John Smith",
+                "email": "john@example.com",
+                "subject": "Mathematics"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/{id}": {
+      "get": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "Get a single teacher by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Teacher ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Teacher found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "60d0fe4f5311236168a109ca"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "John Smith"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "john@example.com"
+                },
+                "subject": {
+                  "type": "string",
+                  "example": "Mathematics"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Teacher not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "Update an existing teacher by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Teacher ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Teacher updated successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "name": "John Smith",
+                "email": "john@example.com",
+                "subject": "Mathematics"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "Delete a teacher by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Teacher ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Teacher deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Teacher not found"
           },
           "500": {
             "description": "Internal Server Error"
