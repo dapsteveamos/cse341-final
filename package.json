@@ -36,6 +36,7 @@
     "validatorjs": "^3.22.1"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "jest": "^30.0.0"
   }
 }
