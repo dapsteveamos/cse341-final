@@ -44,7 +44,6 @@ const createSemester = async (req, res) => {
             semesterStart: req.body.semesterStart,
             semesterEnd: req.body.semesterEnd
         };
-        console.log("Inserting semeser:", semeseter);
         const response = await mongodb.getDatabase().db('final').collection('semester').insertOne(semester);
         if (response.acknowledged) {
             res.status(201).json(response);
