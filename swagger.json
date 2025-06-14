@@ -417,6 +417,26 @@
           "teachers"
         ],
         "description": "Create a new teacher",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "John Smith"
+                },
+                "email": {
+                  "example": "john@example.com"
+                },
+                "subject": {
+                  "example": "Mathematics"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Teacher created successfully",
@@ -527,6 +547,24 @@
             "required": true,
             "type": "string",
             "description": "Teacher ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "John Smith"
+                },
+                "email": {
+                  "example": "john@example.com"
+                },
+                "subject": {
+                  "example": "Mathematics"
+                }
+              }
+            }
           }
         ],
         "responses": {
