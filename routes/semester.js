@@ -5,6 +5,8 @@ const router = express.Router();
 
 const semesterController = require('../controllers/semester.js');
 
+router.get('/', semesterController.getAll);
+
 router.post('/', (req, res, next) => {
     const rules = {
         year: 'required|digits:4',
@@ -15,6 +17,7 @@ router.post('/', (req, res, next) => {
 
     validation(req.body, rules, {}, (err, status) => {
         if (!status) {
+            console.log('Validation Error:', err)
             res.status(412).send({
                 success: false,
                 message: 'Validation failed',
@@ -25,6 +28,8 @@ router.post('/', (req, res, next) => {
         }
     });
 }, semesterController.createSemester);
+
+router.get('/:id', semesterController.getSingle);
 
 router.put('/:id', (req, res, next) => {
     const rules = {
@@ -47,8 +52,6 @@ router.put('/:id', (req, res, next) => {
     });
 }, semesterController.updateSemester);
 
-router.get('/', semesterController.getAll);
-router.get('/:id', semesterController.getSingle);
 // router.post('/', semesterController.createSemester);
 // router.put('/:id', semesterController.updateSemester);
 router.delete('/:id', semesterController.deleteSemester);
