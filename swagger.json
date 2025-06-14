@@ -413,41 +413,49 @@
         }
       },
       "post": {
-        "tags": ["teachers"],
-        "summary": "Create a new teacher",
-        "requestBody": {
+      "tags": ["teachers"],
+      "summary": "Create a new teacher",
+      "description": "Creates a new teacher in the database.",
+      "consumes": ["application/json"],
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Teacher object that needs to be added",
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "email": { "type": "string" },
-                  "subject": { "type": "string" }
-                },
-                "required": ["name", "email", "subject"],
-                "example": {
-                  "name": "John Smith",
-                  "email": "john@example.com",
-                  "subject": "Mathematics"
-                }
+          "schema": {
+            "type": "object",
+            "required": ["name", "email", "subject"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "John Smith"
+              },
+              "email": {
+                "type": "string",
+                "example": "john@example.com"
+              },
+              "subject": {
+                "type": "string",
+                "example": "Mathematics"
               }
             }
           }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "Teacher created successfully"
         },
-        "responses": {
-          "201": {
-            "description": "Teacher created successfully"
-          },
-          "422": {
-            "description": "Validation failed"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
+        "422": {
+          "description": "Validation failed"
+        },
+        "500": {
+          "description": "Internal server error"
         }
       }
+    }
     },
     "/teacher/{id}": {
       "get": {
@@ -506,51 +514,46 @@
       "put": {
         "tags": ["teachers"],
         "summary": "Update an existing teacher",
+        "description": "Updates a teacher by ID.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "The ID of the teacher to update",
+            "type": "string",
+            "description": "ID of the teacher to update",
+            "example": "60d0fe4f5311236168a109ca"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated teacher object",
+            "required": true,
             "schema": {
-              "type": "string",
-              "example": "60d0fe4f5311236168a109ca"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "subject": {
-                    "type": "string"
-                  }
+              "type": "object",
+              "required": ["name", "email", "subject"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Jane Doe"
                 },
-                "required": ["name", "email", "subject"],
-                "example": {
-                  "name": "Jane Doe",
-                  "email": "jane@example.com",
-                  "subject": "Science"
+                "email": {
+                  "type": "string",
+                  "example": "jane@example.com"
+                },
+                "subject": {
+                  "type": "string",
+                  "example": "Science"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "204": {
             "description": "Teacher updated successfully"
-          },
-          "400": {
-            "description": "Invalid ID or malformed request"
           },
           "422": {
             "description": "Validation failed"
