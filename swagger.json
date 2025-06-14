@@ -55,16 +55,16 @@
               "type": "object",
               "properties": {
                 "year": {
-                  "example": "any"
+                  "example": "2025"
                 },
                 "semesterSeason": {
-                  "example": "any"
+                  "example": "Winter"
                 },
                 "semesterStart": {
-                  "example": "any"
+                  "example": "2025-06-21"
                 },
                 "semesterEnd": {
-                  "example": "any"
+                  "example": "2025-06-23"
                 }
               }
             }
@@ -117,16 +117,16 @@
               "type": "object",
               "properties": {
                 "year": {
-                  "example": "any"
+                  "example": "2020"
                 },
                 "semesterSeason": {
-                  "example": "any"
+                  "example": "Winter"
                 },
                 "semesterStart": {
-                  "example": "any"
+                  "example": "2025-06-21"
                 },
                 "semesterEnd": {
-                  "example": "any"
+                  "example": "2025-06-21"
                 }
               }
             }
