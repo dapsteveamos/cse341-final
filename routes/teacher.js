@@ -18,14 +18,14 @@ router.get('/:id', isAuthenticated, teacherController.getSingle);
 router.post(
     '/',
     isAuthenticated,
-    validation.validate(teacherValidationRules),
+    // validation.validate(teacherValidationRules),
     teacherController.createTeacher
 );
 
 router.put(
     '/:id',
     isAuthenticated,
-    validation.validate(teacherValidationRules),
+    // validation.validate(teacherValidationRules),
     teacherController.updateTeacher
 );
 
