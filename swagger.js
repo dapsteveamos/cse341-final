@@ -43,7 +43,6 @@ const options = {
         description: 'Development server',
       },
     ],
-
   },
   apis: ['./routes/*.js'],
 };

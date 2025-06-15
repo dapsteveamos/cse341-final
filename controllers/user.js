@@ -1,12 +1,11 @@
-const mongodb = require('../data/database.js');
+const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
   //#swagger.tags=['Users']
   try {
     const result = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('user')
       .find();
     const users = await result.toArray();
@@ -21,8 +20,7 @@ const getSingle = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
     const result = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('user')
       .find({ _id: userId });
     const user = await result.toArray();
@@ -44,8 +42,7 @@ const createUser = async (req, res) => {
       age: req.body.age,
     };
     const response = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('user')
       .insertOne(user);
     if (response.acknowledged) {
@@ -68,8 +65,7 @@ const updateUser = async (req, res) => {
       age: req.body.age,
     };
     const response = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('user')
       .replaceOne({ _id: userId }, user);
     if (response.modifiedCount > 0) {
@@ -87,8 +83,7 @@ const deleteUser = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
     const response = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('user')
       .deleteOne({ _id: userId });
     if (response.deletedCount > 0) {

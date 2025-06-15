@@ -1,4 +1,4 @@
-const mongodb = require('../data/database.js');
+const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 // Get all students
@@ -6,8 +6,7 @@ const getAll = async (req, res) => {
   //#swagger.tags=['Students']
   try {
     const result = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('student')
       .find();
     const students = await result.toArray();
@@ -26,8 +25,7 @@ const getSingle = async (req, res) => {
   try {
     const studentId = new ObjectId(req.params.id);
     const result = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('student')
       .find({ _id: studentId });
     const students = await result.toArray();
@@ -58,8 +56,7 @@ const createStudent = async (req, res) => {
       address: req.body.address,
     };
     const response = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('student')
       .insertOne(student);
     if (response.acknowledged) {
@@ -88,8 +85,7 @@ const updateStudent = async (req, res) => {
       address: req.body.address,
     };
     const response = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('student')
       .replaceOne({ _id: studentId }, student);
     if (response.modifiedCount > 0) {
@@ -109,8 +105,7 @@ const deleteStudent = async (req, res) => {
   try {
     const studentId = new ObjectId(req.params.id);
     const response = await mongodb
-      .getDatabase()
-      .db('final')
+      .getDb()
       .collection('student')
       .deleteOne({ _id: studentId });
     if (response.deletedCount > 0) {
