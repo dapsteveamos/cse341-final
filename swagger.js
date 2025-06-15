@@ -35,7 +35,7 @@ const options = {
     },
     servers: [
       {
-        url: `https://cse341-1-swgh.onrender.com`,
+        url: `https://cse341-final-xrc5.onrender.com`,
         description: 'Production server',
       },
       {
