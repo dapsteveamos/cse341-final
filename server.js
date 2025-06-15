@@ -83,7 +83,7 @@ app.get(
   }),
   (req, res) => {
     req.session.user = req.user;
-    res.redirect('/');
+    res.redirect('/api-docs');
   }
 );
 

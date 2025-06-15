@@ -113,7 +113,7 @@ const deleteStudent = async (req, res) => {
     } else {
       res.status(404).json({ message: 'Student not found' });
     }
-  } catch {
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message || 'Error deleting student' });
   }
