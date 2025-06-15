@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const validation = require('../middleware/validation');
 
 const studentController = require('../controllers/student.js');
 
@@ -134,7 +135,7 @@ router.get('/:id', studentController.getSingle);
  *       500:
  *         description: Server error
  */
-router.post('/', studentController.createStudent);
+router.post('/', validation.validateStudent, studentController.createStudent);
 
 /**
  * @swagger
@@ -183,7 +184,7 @@ router.post('/', studentController.createStudent);
  *       500:
  *         description: Server error
  */
-router.put('/:id', studentController.updateStudent);
+router.put('/:id', validation.validateStudent, studentController.updateStudent);
 
 /**
  * @swagger

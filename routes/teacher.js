@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const validation = require('../middleware/validation');
 
-const teacherController = require('../controllers/teacher.js');
+const teacherController = require('../controllers/teacher');
 
 /**
  * @swagger
@@ -134,10 +135,7 @@ router.get('/:id', teacherController.getSingle);
  *       500:
  *         description: Server error
  */
-router.post(
-  '/',
-  teacherController.createTeacher
-);
+router.post('/', validation.validateTeacher, teacherController.createTeacher);
 
 /**
  * @swagger
@@ -174,6 +172,10 @@ router.post(
  *               department:
  *                 type: string
  *                 description: The teacher's department.
+ *               hireDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The teacher's hire date (YYYY-MM-DD).
  *     responses:
  *       204:
  *         description: Teacher updated successfully.
@@ -186,10 +188,7 @@ router.post(
  *       500:
  *         description: Server error
  */
-router.put(
-  '/:id',
-  teacherController.updateTeacher
-);
+router.put('/:id', validation.validateTeacher, teacherController.updateTeacher);
 
 /**
  * @swagger
