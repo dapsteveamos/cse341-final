@@ -111,7 +111,7 @@ const deleteStudent = async (req, res) => {
     if (response.deletedCount > 0) {
       res.status(200).json({ message: 'student deleted' });
     } else {
-      res.status(404).json({ message: 'student not found' });
+      res.status(404).json({ message: 'Student not found' });
     }
   } catch (err) {
     console.error(err);

@@ -1,12 +1,12 @@
 const semesterController = require('../controllers/semester');
-const mongodb = require('../data/database');
+const mongodb = require('../db/connect');
 const { ObjectId } = require('mongodb');
 
-jest.mock('../data/database');
+jest.mock('../db/connect');
 
 const mockJson = jest.fn();
 const mockStatus = jest.fn(() => ({ json: mockJson }));
-const mockRes = { status: mockStatus };
+const mockRes = { status: mockStatus, setHeader: jest.fn() };
 
 beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -21,11 +21,9 @@ describe('Semester Controller - getAll', () => {
     const mockSemesters = [{ year: '2025' }, { year: '2024' }];
 
     mongodb.getDatabase.mockReturnValue({
-      db: () => ({
-        collection: () => ({
-          find: () => ({
-            toArray: () => Promise.resolve(mockSemesters),
-          }),
+      collection: () => ({
+        find: () => ({
+          toArray: () => Promise.resolve(mockSemesters),
         }),
       }),
     });
@@ -54,11 +52,9 @@ describe('Semester Controller - getSingle', () => {
     const req = { params: { id: mockSemester._id.toHexString() } };
 
     mongodb.getDatabase.mockReturnValue({
-      db: () => ({
-        collection: () => ({
-          find: () => ({
-            toArray: () => Promise.resolve([mockSemester]),
-          }),
+      collection: () => ({
+        find: () => ({
+          toArray: () => Promise.resolve([mockSemester]),
         }),
       }),
     });
@@ -73,11 +69,9 @@ describe('Semester Controller - getSingle', () => {
     const req = { params: { id: new ObjectId().toHexString() } };
 
     mongodb.getDatabase.mockReturnValue({
-      db: () => ({
-        collection: () => ({
-          find: () => ({
-            toArray: () => Promise.resolve([]),
-          }),
+      collection: () => ({
+        find: () => ({
+          toArray: () => Promise.resolve([]),
         }),
       }),
     });

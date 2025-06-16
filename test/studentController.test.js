@@ -1,8 +1,8 @@
 const studentController = require('../controllers/student');
-const mongodb = require('../data/database');
+const mongodb = require('../db/connect');
 
 // Mock MongoDB
-jest.mock('../data/database', () => ({
+jest.mock('../db/connect', () => ({
   getDatabase: jest.fn(),
 }));
 
@@ -16,13 +16,13 @@ describe('GET /students - getAll', () => {
     const toArray = jest.fn().mockResolvedValue(mockStudents);
     const find = jest.fn().mockReturnValue({ toArray });
     const collection = jest.fn().mockReturnValue({ find });
-    const db = jest.fn().mockReturnValue({ collection });
-    mongodb.getDatabase.mockReturnValue({ db });
+    mongodb.getDatabase.mockReturnValue({ collection });
 
     const req = {}; // No params or body needed
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
+      setHeader: jest.fn(),
     };
 
     await studentController.getAll(req, res);
@@ -40,6 +40,7 @@ describe('GET /students - getAll', () => {
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
+      setHeader: jest.fn(),
     };
 
     await studentController.getAll(req, res);
@@ -62,13 +63,13 @@ describe('GET /students/:id - getSingle', () => {
     const toArray = jest.fn().mockResolvedValue([mockStudent]);
     const find = jest.fn().mockReturnValue({ toArray });
     const collection = jest.fn().mockReturnValue({ find });
-    const db = jest.fn().mockReturnValue({ collection });
-    mongodb.getDatabase.mockReturnValue({ db });
+    mongodb.getDatabase.mockReturnValue({ collection });
 
     const req = { params: { id: validId } };
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
+      setHeader: jest.fn(),
     };
 
     await studentController.getSingle(req, res);
@@ -81,8 +82,7 @@ describe('GET /students/:id - getSingle', () => {
     const toArray = jest.fn().mockResolvedValue([]);
     const find = jest.fn().mockReturnValue({ toArray });
     const collection = jest.fn().mockReturnValue({ find });
-    const db = jest.fn().mockReturnValue({ collection });
-    mongodb.getDatabase.mockReturnValue({ db });
+    mongodb.getDatabase.mockReturnValue({ collection });
 
     const req = { params: { id: validId } };
     const res = {
@@ -93,7 +93,7 @@ describe('GET /students/:id - getSingle', () => {
     await studentController.getSingle(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ message: 'student not found' });
+    expect(res.json).toHaveBeenCalledWith({ message: 'Student not found' });
   });
 
   it('should return 500 on error (e.g., invalid ObjectId)', async () => {

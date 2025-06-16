@@ -1,12 +1,12 @@
 const teacherController = require('../controllers/teacher');
-const mongodb = require('../data/database');
+const mongodb = require('../db/connect');
 const { ObjectId } = require('mongodb');
 
-jest.mock('../data/database');
+jest.mock('../db/connect');
 
 const mockJson = jest.fn();
 const mockStatus = jest.fn(() => ({ json: mockJson }));
-const mockRes = { status: mockStatus };
+const mockRes = { status: mockStatus, setHeader: jest.fn() };
 
 beforeAll(() => {
   // Suppress console.error during tests
@@ -22,11 +22,9 @@ describe('Teacher Controller - getAll', () => {
     const mockTeachers = [{ name: 'Ms. White' }, { name: 'Mr. Black' }];
 
     mongodb.getDatabase.mockReturnValue({
-      db: () => ({
-        collection: () => ({
-          find: () => ({
-            toArray: () => Promise.resolve(mockTeachers),
-          }),
+      collection: () => ({
+        find: () => ({
+          toArray: () => Promise.resolve(mockTeachers),
         }),
       }),
     });
@@ -55,11 +53,9 @@ describe('Teacher Controller - getSingle', () => {
     const req = { params: { id: mockTeacher._id.toHexString() } };
 
     mongodb.getDatabase.mockReturnValue({
-      db: () => ({
-        collection: () => ({
-          find: () => ({
-            toArray: () => Promise.resolve([mockTeacher]),
-          }),
+      collection: () => ({
+        find: () => ({
+          toArray: () => Promise.resolve([mockTeacher]),
         }),
       }),
     });
@@ -74,11 +70,9 @@ describe('Teacher Controller - getSingle', () => {
     const req = { params: { id: new ObjectId().toHexString() } };
 
     mongodb.getDatabase.mockReturnValue({
-      db: () => ({
-        collection: () => ({
-          find: () => ({
-            toArray: () => Promise.resolve([]),
-          }),
+      collection: () => ({
+        find: () => ({
+          toArray: () => Promise.resolve([]),
         }),
       }),
     });
