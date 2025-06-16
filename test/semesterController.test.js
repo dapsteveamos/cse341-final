@@ -24,10 +24,10 @@ describe('Semester Controller - getAll', () => {
       db: () => ({
         collection: () => ({
           find: () => ({
-            toArray: () => Promise.resolve(mockSemesters)
-          })
-        })
-      })
+            toArray: () => Promise.resolve(mockSemesters),
+          }),
+        }),
+      }),
     });
 
     await semesterController.getAll({}, mockRes);
@@ -57,10 +57,10 @@ describe('Semester Controller - getSingle', () => {
       db: () => ({
         collection: () => ({
           find: () => ({
-            toArray: () => Promise.resolve([mockSemester])
-          })
-        })
-      })
+            toArray: () => Promise.resolve([mockSemester]),
+          }),
+        }),
+      }),
     });
 
     await semesterController.getSingle(req, mockRes);
@@ -76,10 +76,10 @@ describe('Semester Controller - getSingle', () => {
       db: () => ({
         collection: () => ({
           find: () => ({
-            toArray: () => Promise.resolve([])
-          })
-        })
-      })
+            toArray: () => Promise.resolve([]),
+          }),
+        }),
+      }),
     });
 
     await semesterController.getSingle(req, mockRes);
@@ -94,6 +94,8 @@ describe('Semester Controller - getSingle', () => {
     await semesterController.getSingle(req, mockRes);
 
     expect(mockStatus).toHaveBeenCalledWith(500);
-    expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({ message: expect.any(String) }));
+    expect(mockJson).toHaveBeenCalledWith(
+      expect.objectContaining({ message: expect.any(String) })
+    );
   });
 });

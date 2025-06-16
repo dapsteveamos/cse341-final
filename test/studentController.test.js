@@ -3,14 +3,14 @@ const mongodb = require('../data/database');
 
 // Mock MongoDB
 jest.mock('../data/database', () => ({
-  getDatabase: jest.fn()
+  getDatabase: jest.fn(),
 }));
 
 describe('GET /students - getAll', () => {
   it('should return all students with status 200', async () => {
     const mockStudents = [
       { name: 'John Doe', email: 'john@example.com' },
-      { name: 'Jane Smith', email: 'jane@example.com' }
+      { name: 'Jane Smith', email: 'jane@example.com' },
     ];
 
     const toArray = jest.fn().mockResolvedValue(mockStudents);
@@ -22,7 +22,7 @@ describe('GET /students - getAll', () => {
     const req = {}; // No params or body needed
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
     };
 
     await studentController.getAll(req, res);
@@ -39,7 +39,7 @@ describe('GET /students - getAll', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
     };
 
     await studentController.getAll(req, res);
@@ -53,7 +53,11 @@ describe('GET /students/:id - getSingle', () => {
   const validId = '60d0fe4f5311236168a109ca';
 
   it('should return a student when found', async () => {
-    const mockStudent = { _id: validId, name: 'John Doe', email: 'john@example.com' };
+    const mockStudent = {
+      _id: validId,
+      name: 'John Doe',
+      email: 'john@example.com',
+    };
 
     const toArray = jest.fn().mockResolvedValue([mockStudent]);
     const find = jest.fn().mockReturnValue({ toArray });
@@ -64,7 +68,7 @@ describe('GET /students/:id - getSingle', () => {
     const req = { params: { id: validId } };
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
     };
 
     await studentController.getSingle(req, res);
@@ -83,7 +87,7 @@ describe('GET /students/:id - getSingle', () => {
     const req = { params: { id: validId } };
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
     };
 
     await studentController.getSingle(req, res);
@@ -96,7 +100,7 @@ describe('GET /students/:id - getSingle', () => {
     const req = { params: { id: 'invalid-id' } };
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
     };
 
     await studentController.getSingle(req, res);

@@ -25,10 +25,10 @@ describe('Teacher Controller - getAll', () => {
       db: () => ({
         collection: () => ({
           find: () => ({
-            toArray: () => Promise.resolve(mockTeachers)
-          })
-        })
-      })
+            toArray: () => Promise.resolve(mockTeachers),
+          }),
+        }),
+      }),
     });
 
     await teacherController.getAll({}, mockRes);
@@ -58,10 +58,10 @@ describe('Teacher Controller - getSingle', () => {
       db: () => ({
         collection: () => ({
           find: () => ({
-            toArray: () => Promise.resolve([mockTeacher])
-          })
-        })
-      })
+            toArray: () => Promise.resolve([mockTeacher]),
+          }),
+        }),
+      }),
     });
 
     await teacherController.getSingle(req, mockRes);
@@ -77,10 +77,10 @@ describe('Teacher Controller - getSingle', () => {
       db: () => ({
         collection: () => ({
           find: () => ({
-            toArray: () => Promise.resolve([])
-          })
-        })
-      })
+            toArray: () => Promise.resolve([]),
+          }),
+        }),
+      }),
     });
 
     await teacherController.getSingle(req, mockRes);
@@ -95,6 +95,8 @@ describe('Teacher Controller - getSingle', () => {
     await teacherController.getSingle(req, mockRes);
 
     expect(mockStatus).toHaveBeenCalledWith(500);
-    expect(mockJson).toHaveBeenCalledWith(expect.objectContaining({ message: expect.any(String) }));
+    expect(mockJson).toHaveBeenCalledWith(
+      expect.objectContaining({ message: expect.any(String) })
+    );
   });
 });
