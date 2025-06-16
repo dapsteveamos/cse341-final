@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await mongodb.getDb().collection('teachers').find();
+    const result = await mongodb.getDatabase().collection('teachers').find();
     result.toArray().then((lists) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
@@ -22,7 +22,7 @@ const getSingle = async (req, res, next) => {
   try {
     const userId = new ObjectId(req.params.id);
     const result = await mongodb
-      .getDb()
+      .getDatabase()
       .collection('teachers')
       .find({ _id: userId });
     result.toArray().then((lists) => {
@@ -53,7 +53,7 @@ const createTeacher = async (req, res, next) => {
       hireDate: req.body.hireDate,
     };
     const response = await mongodb
-      .getDb()
+      .getDatabase()
       .collection('teachers')
       .insertOne(teacher);
     if (response.acknowledged) {
@@ -82,7 +82,7 @@ const updateTeacher = async (req, res, next) => {
       hireDate: req.body.hireDate,
     };
     const response = await mongodb
-      .getDb()
+      .getDatabase()
       .collection('teachers')
       .replaceOne({ _id: userId }, teacher);
     if (response.modifiedCount > 0) {
@@ -104,7 +104,7 @@ const deleteTeacher = async (req, res, next) => {
   try {
     const userId = new ObjectId(req.params.id);
     const response = await mongodb
-      .getDb()
+      .getDatabase()
       .collection('teachers')
       .deleteOne({ _id: userId });
     if (response.deletedCount > 0) {

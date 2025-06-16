@@ -7,14 +7,14 @@ router.get('/', isAuthenticated, (req, res) => {
   res.send('Welcome to the Products API');
 });
 
-router.use('/course', require('./course'));
+router.use('/courses', require('./course'));
 
-router.use('/semester', require('./semester'));
+router.use('/semesters', require('./semester'));
 
 router.use('/student', require('./student'));
 
 router.use('/teacher', require('./teacher'));
 
-router.use('/user', require('./user'));
+router.use('/users', require('./user'));
 
 module.exports = router;

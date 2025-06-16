@@ -7,7 +7,6 @@ const getAll = async (req, res) => {
   try {
     const result = await mongodb
       .getDatabase()
-      .db('final')
       .collection('semester')
       .find();
     const semesters = await result.toArray();
@@ -27,7 +26,6 @@ const getSingle = async (req, res) => {
     const semesterId = new ObjectId(req.params.id);
     const result = await mongodb
       .getDatabase()
-      .db('final')
       .collection('semester')
       .find({ _id: semesterId });
     const semester = await result.toArray();
@@ -56,7 +54,6 @@ const createSemester = async (req, res) => {
     };
     const response = await mongodb
       .getDatabase()
-      .db('final')
       .collection('semester')
       .insertOne(semester);
     if (response.acknowledged) {
@@ -83,7 +80,6 @@ const updateSemester = async (req, res) => {
     };
     const response = await mongodb
       .getDatabase()
-      .db('final')
       .collection('semester')
       .replaceOne({ _id: semesterId }, semester);
     if (response.modifiedCount > 0) {
@@ -104,7 +100,6 @@ const deleteSemester = async (req, res) => {
     const semesterId = new ObjectId(req.params.id);
     const response = await mongodb
       .getDatabase()
-      .db('final')
       .collection('semester')
       .deleteOne({ _id: semesterId });
     if (response.deletedCount > 0) {
