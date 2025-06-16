@@ -101,6 +101,7 @@ describe('GET /students/:id - getSingle', () => {
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
+      setHeader: jest.fn(),
     };
 
     await studentController.getSingle(req, res);
@@ -109,5 +110,73 @@ describe('GET /students/:id - getSingle', () => {
     expect(res.json).toHaveBeenCalledWith(
       expect.objectContaining({ message: expect.any(String) })
     );
+  });
+});
+
+describe('POST /students - createStudent', () => {
+  it('should create a new student with status 201', async () => {
+    const mockStudent = {
+      firstName: 'Test',
+      lastName: 'Student',
+      email: 'test@example.com',
+      major: 'Computer Science',
+      gpa: 3.5,
+    };
+
+    mongodb.getDatabase.mockReturnValue({
+      collection: () => ({
+        insertOne: jest.fn().mockResolvedValue({ acknowledged: true, insertedId: 'someId' }),
+      }),
+    });
+
+    const req = { body: mockStudent };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      setHeader: jest.fn(),
+    };
+
+    await studentController.createStudent(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({ acknowledged: true, insertedId: 'someId' });
+  });
+
+  it('should return 500 if student creation fails', async () => {
+    mongodb.getDatabase.mockReturnValue({
+      collection: () => ({
+        insertOne: jest.fn().mockResolvedValue({ acknowledged: false }),
+      }),
+    });
+
+    const req = { body: {} };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      setHeader: jest.fn(),
+    };
+
+    await studentController.createStudent(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Failed to create student' });
+  });
+
+  it('should return 500 on database error during creation', async () => {
+    mongodb.getDatabase.mockImplementation(() => {
+      throw new Error('DB connection error');
+    });
+
+    const req = { body: {} };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      setHeader: jest.fn(),
+    };
+
+    await studentController.createStudent(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ message: 'DB connection error' });
   });
 });

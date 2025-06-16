@@ -94,3 +94,53 @@ describe('Teacher Controller - getSingle', () => {
     );
   });
 });
+
+describe('Teacher Controller - createTeacher', () => {
+  it('should create a new teacher with status 201', async () => {
+    const mockTeacher = {
+      firstName: 'Test',
+      lastName: 'Teacher',
+      email: 'test.teacher@example.com',
+      department: 'Computer Science',
+      rank: 'Professor',
+    };
+
+    mongodb.getDatabase.mockReturnValue({
+      collection: () => ({
+        insertOne: jest.fn().mockResolvedValue({ acknowledged: true, insertedId: 'someId' }),
+      }),
+    });
+
+    const req = { body: mockTeacher };
+    await teacherController.createTeacher(req, mockRes);
+
+    expect(mockStatus).toHaveBeenCalledWith(201);
+    expect(mockJson).toHaveBeenCalledWith({ acknowledged: true, insertedId: 'someId' });
+  });
+
+  it('should return 500 if teacher creation fails', async () => {
+    mongodb.getDatabase.mockReturnValue({
+      collection: () => ({
+        insertOne: jest.fn().mockResolvedValue({ acknowledged: false }),
+      }),
+    });
+
+    const req = { body: {} };
+    await teacherController.createTeacher(req, mockRes);
+
+    expect(mockStatus).toHaveBeenCalledWith(500);
+    expect(mockJson).toHaveBeenCalledWith('Some error occurred while creating the teacher.');
+  });
+
+  it('should return 500 on database error during creation', async () => {
+    mongodb.getDatabase.mockImplementation(() => {
+      throw new Error('DB connection error');
+    });
+
+    const req = { body: {} };
+    await teacherController.createTeacher(req, mockRes);
+
+    expect(mockStatus).toHaveBeenCalledWith(500);
+    expect(mockJson).toHaveBeenCalledWith({ message: 'DB connection error' });
+  });
+});
