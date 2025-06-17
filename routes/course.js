@@ -5,10 +5,14 @@ const router = express.Router();
 
 const courseController = require('../controllers/course.js');
 
-// router.get('/', );
-// router.get('/:id', );
-// router.post('/', )
-// router.put('/:id', );
-// router.delete('/:id', );
+router.get('/',);
+
+router.get('/:id',);
+
+router.post('/',)
+
+router.put('/:id',);
+
+router.delete('/:id', );
 
 module.exports = router;
