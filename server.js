@@ -37,6 +37,7 @@ app.use(cors({ methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']}))
 app.use(cors({ origin: '*'}))
 app.use('/', require('./routes'));
 
+// Initialize GitHub OAuth strategy
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -49,6 +50,7 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
+// Serialize user information into the session
 passport.serializeUser((user, done) => {
     done(null, user);
 });
@@ -65,6 +67,7 @@ app.get('/github/callback', passport.authenticate('github', {
         res.redirect('/');
 });
 
+// Handle uncaught exceptions
 process.on('uncaughtException', (err, origin) => {
     console.log(process.stderr.fd, `Caught Exception: ${err}\n` + `Exception Origin: ${origin}`);
 });

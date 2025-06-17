@@ -134,6 +134,7 @@ const deleteTeacher = async (req, res) => {
     }
 };
 
+// Exporting the functions to be used in routes
 module.exports = {
     getAll,
     getSingle,

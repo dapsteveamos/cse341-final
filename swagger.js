@@ -9,6 +9,7 @@ const doc = {
     schemes: ['http', 'https']
 };
 
+//    res.status(500).json({ message: err.message });
 const outputFile = './swagger.json';
 const endpointsFiles = ['./routes/index.js'];
 

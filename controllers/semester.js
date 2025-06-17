@@ -96,6 +96,7 @@ const deleteSemester = async (req, res) => {
 }
 };
 
+// Export the functions
 module.exports = {
     getAll,
     getSingle,

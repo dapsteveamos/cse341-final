@@ -1,10 +1,14 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+// data/database.js
+// This module initializes and provides access to the MongoDB database connection
 const MongoClient = require('mongodb').MongoClient;
 
+// Initialize the database variable
 let database;
 
+// Function to initialize the database connection
 const initDb = (callback) => {
     if (database) {
         console.log('Db is already initialized!');
@@ -20,6 +24,7 @@ const initDb = (callback) => {
     });
 };
 
+// Function to get the database instance
 const getDatabase = () => {
     if (!database) {
         throw Error('Database not initialized')
@@ -27,6 +32,7 @@ const getDatabase = () => {
     return database;
 };
 
+// Export the initDb and getDatabase functions
 module.exports = {
     initDb,
     getDatabase
